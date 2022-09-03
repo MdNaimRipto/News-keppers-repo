@@ -45,3 +45,17 @@
     padding: 7px 10px;
     border-radius: 5px;
 }
+
+.category-image {
+    width: 20%;
+}
+
+.author-details p {
+    font-size: 9px;
+}
+
+.full-news-btn {
+    border: none;
+    color: #5d5fef;
+    font-size: 16px;
+}
