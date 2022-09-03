@@ -1,3 +1,4 @@
+/* Catagory display section */
 const loadCategory = () => {
     url = "https://openapi.programming-hero.com/api/news/categories";
     fetch(url)
@@ -5,34 +6,34 @@ const loadCategory = () => {
         .then(data => displayCategory(data.data.news_category))
 }
 const displayCategory = (titles) => {
-    // console.log(titles)
     const categoryContainer = document.getElementById("category-container");
     titles.forEach(title => {
         const newList = document.createElement("li");
         newList.classList.add("category-li");
         newList.innerHTML = `
-            <span class="px-3 pt-4" onclick="loadCategoryContent('${title.category_id}')">${title.category_name}</span>
+            <span class="px-3 pt-4" onclick="loadNewsContent('${title.category_id}')">${title.category_name}</span>
         `
         categoryContainer.appendChild(newList);
     });
 }
 
-const loadCategoryContent = (category_id) => {
+/* News load function */
+const loadNewsContent = (category_id) => {
     toogleLoader(true)
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => displayCategoryContent(data.data))
+        .then(data => displayNewsContent(data.data))
 }
-const displayCategoryContent = (allNews) => {
+const displayNewsContent = (allNews) => {
     const newsContainer = document.getElementById("news-container");
     newsContainer.innerHTML = ``;
     const totalItems = document.getElementById("item-number");
     if (allNews.length === 0) {
-        totalItems.innerText = `0 Items found`
+        totalItems.innerText = `0 News found`
     }
     else {
-        totalItems.innerText = `${allNews.length} Items found`
+        totalItems.innerText = `${allNews.length} News found`
     }
     const noNews = document.getElementById("no-news");
     if (allNews.length === 0) {
@@ -43,7 +44,7 @@ const displayCategoryContent = (allNews) => {
         noNews.classList.add("d-none")
     }
     allNews.forEach(news => {
-        const { thumbnail_url, title, details, total_view } = news;
+        const { thumbnail_url, title, details, total_view, category_id } = news;
         const newsDiv = document.createElement("div");
         newsDiv.classList.add("col")
         newsDiv.innerHTML = `
@@ -81,7 +82,8 @@ const displayCategoryContent = (allNews) => {
                     </div>
                 </div>
                     <div class="col">
-                        <button class="full-news-btn text-size pt-2">
+                        <button type="button" onclick="loadModal('${news._id}')" class="btn full-news-btn text-size pt-2" 
+                            data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
@@ -95,6 +97,29 @@ const displayCategoryContent = (allNews) => {
     })
 }
 
+/* Modals section */
+const loadModal = (news_id) => {
+    const url = ` https://openapi.programming-hero.com/api/news/${news_id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayModal(data.data))
+}
+const displayModal = (news) => {
+    const modalTitle = document.getElementById("exampleModalLabel");
+    modalTitle.innerHTML = `
+        <h5>${news[0].title}</h5>
+    `
+    const newsDetail = document.getElementById("news-detail")
+    newsDetail.innerHTML = ``;
+    const detailDiv = document.createElement("div");
+    detailDiv.innerHTML = `
+        <p>${news[0].details}</p>
+    `
+    newsDetail.appendChild(detailDiv);
+}
+
+
+/* Spinner function */
 const toogleLoader = (isLoading) => {
     const loader = document.getElementById("loader")
     if (isLoading) {
@@ -104,5 +129,7 @@ const toogleLoader = (isLoading) => {
         loader.classList.add("d-none")
     }
 }
+
+/* function calls */
 loadCategory();
-loadCategoryContent("01");
+loadNewsContent("01");
