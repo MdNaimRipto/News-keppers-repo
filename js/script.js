@@ -31,6 +31,9 @@ const loadNewsContent = (category_id) => {
 const displayNewsContent = (allNews) => {
     const newsContainer = document.getElementById("news-container");
     newsContainer.innerHTML = ``;
+    allNews.sort((a, b) => {
+        return b.total_view - a.total_view;
+    });
     const totalItems = document.getElementById("item-number");
     if (allNews.length === 0) {
         totalItems.innerText = `0 News found`
@@ -47,6 +50,7 @@ const displayNewsContent = (allNews) => {
         noNews.classList.add("d-none")
     }
     allNews.forEach(news => {
+        console.log(news)
         const { thumbnail_url, title, details, total_view, category_id } = news;
         const newsDiv = document.createElement("div");
         newsDiv.classList.add("col")
