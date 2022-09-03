@@ -1,0 +1,16 @@
+.common-style {
+    background-color: #5d5fef;
+    color: #FFFFFF;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.common-style-two {
+    color: #5d5fef;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 600;
+}
