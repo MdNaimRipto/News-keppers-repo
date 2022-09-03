@@ -59,3 +59,31 @@
     color: #5d5fef;
     font-size: 16px;
 }
+
+@media screen and (max-width:576px) {
+    .news-thumbnail {
+        width: 100%;
+    }
+
+    .img-thumbnail {
+        width: 100%;
+        height: 45vh;
+    }
+
+    .author-img {
+        width: 6vh;
+    }
+
+    .author-name {
+        font-size: 8px;
+        margin-bottom: 3px;
+    }
+
+    .publishing-date {
+        font-size: 6px !important;
+    }
+
+    .text-size {
+        font-size: 12px;
+    }
+}
