@@ -18,6 +18,7 @@ const displayCategory = (titles) => {
 }
 
 const loadCategoryContent = (category_id) => {
+    toogleLoader(true)
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     fetch(url)
         .then(res => res.json())
@@ -36,6 +37,7 @@ const displayCategoryContent = (allNews) => {
     const noNews = document.getElementById("no-news");
     if (allNews.length === 0) {
         noNews.classList.remove("d-none")
+        toogleLoader(false)
     }
     else {
         noNews.classList.add("d-none")
@@ -89,9 +91,18 @@ const displayCategoryContent = (allNews) => {
         </div>
     `
         newsContainer.appendChild(newsDiv)
+        toogleLoader(false)
     })
 }
 
-
+const toogleLoader = (isLoading) => {
+    const loader = document.getElementById("loader")
+    if (isLoading) {
+        loader.classList.remove("d-none")
+    }
+    else {
+        loader.classList.add("d-none")
+    }
+}
 loadCategory();
 loadCategoryContent("01");
