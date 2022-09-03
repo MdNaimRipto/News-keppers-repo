@@ -22,6 +22,26 @@
     cursor: pointer;
 }
 
-.category-li:active {
+.category-li:hover {
     color: #5d5fef;
+}
+
+.view-option-box {
+    width: 170px;
+}
+
+.primary-btn {
+    color: #FFFFFF;
+    background-color: #5d5fef;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.socendery-btn {
+    color: #5d5fef;
+    border: 1px solid #5d5fef;
+    padding: 7px 10px;
+    border-radius: 5px;
 }
