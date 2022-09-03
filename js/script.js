@@ -4,7 +4,9 @@ const loadCategory = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategory(data.data.news_category))
+        .catch(error => console.log(error))
 }
+
 const displayCategory = (titles) => {
     const categoryContainer = document.getElementById("category-container");
     titles.forEach(title => {
@@ -24,6 +26,7 @@ const loadNewsContent = (category_id) => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayNewsContent(data.data))
+        .catch(error => console.log(error))
 }
 const displayNewsContent = (allNews) => {
     const newsContainer = document.getElementById("news-container");
@@ -66,14 +69,14 @@ const displayNewsContent = (allNews) => {
                                     <img src="${news.author.img}" class="w-100">
                                 </div>
                             <div class="author-details">
-                                <h6 class="author-name">${news.author.name}</h6>
-                                <p class="mb-0 publishing-date">${news.author.published_date}</p>
+                                <h6 class="author-name">${news.author.name ? news.author.name : "No Name Found"}</h6>
+                                <p class="mb-0 publishing-date">${news.author.published_date ? news.author.published_date : "Date Not Found"}</p>
                             </div>
                         </div>
                     </div>
                 <div class="col">
                     <div class="pt-2 text-size">
-                        <i class="fa-regular fa-eye"></i> <span>${total_view}</span>
+                        <i class="fa-regular fa-eye"></i> <span>${total_view ? total_view : "No Views found"}</span>
                     </div>
                 </div>
                 <div class="col">
@@ -102,18 +105,19 @@ const loadModal = (news_id) => {
     const url = ` https://openapi.programming-hero.com/api/news/${news_id}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => displayModal(data.data))
+        .then(data => displayModal(data.data[0]))
+        .catch(error => console.log(error))
 }
 const displayModal = (news) => {
     const modalTitle = document.getElementById("exampleModalLabel");
     modalTitle.innerHTML = `
-        <h5>${news[0].title}</h5>
+        <h5>${news.title}</h5>
     `
     const newsDetail = document.getElementById("news-detail")
     newsDetail.innerHTML = ``;
     const detailDiv = document.createElement("div");
     detailDiv.innerHTML = `
-        <p>${news[0].details}</p>
+        <p>${news.details}</p>
     `
     newsDetail.appendChild(detailDiv);
 }
