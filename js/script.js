@@ -40,7 +40,7 @@ const displayCategoryContent = (allNews) => {
         newsDiv.innerHTML = `
         <div class="card mb-3 mt-5">
             <div class="row g-0">
-                <div class="col-md-4">
+                <div class="col-md-4 w-25">
                     <img src="${thumbnail_url}" class="img-fluid" alt="...">
                 </div>
                 <div class="col-md-8 mt-3">
