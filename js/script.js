@@ -50,7 +50,6 @@ const displayNewsContent = (allNews) => {
         noNews.classList.add("d-none")
     }
     allNews.forEach(news => {
-        console.log(news)
         const { thumbnail_url, title, details, total_view, category_id } = news;
         const newsDiv = document.createElement("div");
         newsDiv.classList.add("col")
@@ -113,6 +112,7 @@ const loadModal = (news_id) => {
         .catch(error => console.log(error))
 }
 const displayModal = (news) => {
+    console.log(news)
     const modalTitle = document.getElementById("exampleModalLabel");
     modalTitle.innerHTML = `
         <h5>${news.title}</h5>
@@ -121,6 +121,8 @@ const displayModal = (news) => {
     newsDetail.innerHTML = ``;
     const detailDiv = document.createElement("div");
     detailDiv.innerHTML = `
+        <h5>Author: ${news.author.name ? news.author.name : "No Name Found"}</h5>
+        <h6>Publish Date: ${news.author.published_date ? news.author.published_date : "Publish Date Not Found"}</h6>
         <p>${news.details}</p>
     `
     newsDetail.appendChild(detailDiv);
